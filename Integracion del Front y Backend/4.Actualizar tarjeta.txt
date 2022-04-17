@@ -1,0 +1,124 @@
+1. Creamos el servicio que edite los datos
+
+
+ updateTarjeta(id: number,tarjeta:any): Observable<any>{
+
+    return this.http.put(this.myAppUrl + this.myApiUrl + id, tarjeta);
+
+  }
+
+2. Modificamos el HTML del formulario para que muestre los datos
+
+
+ * Agregamos un variable llamada accion el ts del componente
+
+		accion= 'Agregar';
+
+ * En el titulo cambiamos la palabra agregar por la variable
+
+		<h3 class="titulo">{{ accion | uppercase }}TARJETAS</h3>
+
+ * Creamos una variable id de tipo nomber o indefinido
+
+	id: number | undefined;
+
+
+3. Creamos el metodo editar en el ts del componente e imprimos la tarjeta para ver
+en consola que nos trae
+
+
+  editarTarjeta(tarjeta: any){
+
+   
+        console.log(tarjeta); 
+
+  
+
+
+  }
+
+4.  En el boton editar agreamos el metodo que acabamos de crear
+
+  <i (click)="editarTarjeta(tarjeta)" class="far fa-edit text-info"></i>
+
+
+5. Modificamos el metodo editar opara que coloque la informacion en el formulario
+
+editarTarjeta(tarjeta: any){
+
+    // Cambiamos el titulo del formulario y asignamos el id de la tarjeta a la variable id creada
+    this.accion = 'Editar ';
+    this.id = tarjeta.id;
+     
+    // LLenamos el fomulario
+
+    this.form.patchValue({
+
+      titular: tarjeta.titular,
+      numeroTarjeta: tarjeta.numeroTarjeta,
+      fechaExpiracion: tarjeta.fechaExpiracion,
+      cvv: tarjeta.cvv
+    })
+
+  
+
+
+  }
+
+
+6.  Modificamos el metodo agregarTarjeta por guardar Tarjeta asi:
+
+	IMPORTANTE: Cambiar el nombre del metodo en el formulario del HTML
+
+
+ guardarTarjeta(){
+
+   
+    const tarjeta: any = {
+
+      titular: this.form.get("titular")?.value,
+      numeroTarjeta: this.form.get("numeroTarjeta")?.value,
+      fechaExpiracion: this.form.get("fechaExpiracion")?.value,
+      cvv: this.form.get("cvv")?.value
+ 
+    }
+
+
+    if(this.id == undefined){
+      // Agregamos una tarjeta
+
+      this._tarjetaServices.saveTarjeta(tarjeta).subscribe(data =>{
+        this.toastr.success('La tarjeta fue registrada con exito', 'Tarejeta Registrada');
+        this.obtenerTArjetas();
+        this.form.reset();
+      }, error => {  
+  
+       console.log(error); 
+       this.toastr.error('Ops ocurrior un error', 'Error');
+  
+      })
+
+    }else{
+
+      tarjeta.id = this.id; // Agreamos el ID de la tarjeta ala variable
+      this._tarjetaServices.updateTarjeta(this.id, tarjeta).subscribe(data =>{
+        this.form.reset();
+        this.accion = 'Agregar ';
+        this.id= undefined;
+        this.toastr.info('La tarjeta fue Editada con exito', 'Tarejeta Editada');
+        this.obtenerTArjetas();
+      
+        
+      
+      }, error => {  
+  
+       console.log(error); 
+       this.toastr.error('Ops ocurrior un error', 'Error');
+  
+      })
+
+
+    }
+
+
+

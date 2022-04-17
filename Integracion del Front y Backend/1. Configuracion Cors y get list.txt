@@ -1,0 +1,140 @@
+1. Dentro de la carpeta APP creamos una carpeta llamada services
+
+2. Ejecutamos el siguiente comandopara generar el servicio
+	
+	* ng g s services/tarjeta // El sevices es la nueva carpeta que creamos
+
+Los servicios se utilizan para las peticiones HTTP, enviar datos entre componentes, reutilizacion de codigos entre componentes
+
+
+3. para HTTP, se debe importar el siguiente modulo en app.module
+
+	import {HttpClientModule} from '@angular/common/http'
+
+
+	  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    HttpClientModule
+
+
+  ],
+
+
+4.Configuramos la URL del API en el archivo service.ts
+
+
+	import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TarjetaService {
+
+  private myAppUrl = 'https://localhost:7286/'; // La url
+  private myApiUrl = 'api/Tarjeta/'; //  El Api del backend
+
+  constructor() { }
+}
+
+Si no queremos copiar esas configuraciones  lo hacemos desde el enviroment (entorno)
+
+
+
+5.  Dentro del constructor colocamos una variable de tipo HttpClient
+
+  constructor( private http: HttpClient) { }
+
+6. Creamos el servicio para el get
+
+
+  constructor( private http: HttpClient) { }
+
+  getListTarjetas(): Observable<any>{
+
+    return this.http.get(this.myAppUrl + this.myApiUrl);
+
+  }
+
+
+
+
+}
+
+7. Dentro del constructor del componente inyectamos el servicio as:
+
+constructor(private fb:FormBuilder,private toastr: ToastrService, private _tarjetaServices:TarjetaService) {
+
+      
+      this.form = this.fb.group({
+
+          titular: ['', Validators.required],
+          numeroTarjeta: ['',[Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
+          fechaExpiracion: ['',[Validators.required, Validators.maxLength(5), Validators.minLength(5)]],
+          cvv: ['',[Validators.required, Validators.maxLength(3), Validators.minLength(3)]]
+      })
+
+
+
+
+   }
+
+
+8. Creamos un metodo que obtenga los datos.
+
+
+ obtenerTArjetas(){
+
+    this._tarjetaServices.getListTarjetas().subscribe(data =>{
+
+      console.log(data);
+    }, error => {  
+
+     console.log(error); 
+
+    })
+
+9. para que inicialice el metodo lo colocamos dentro del ngOnInit
+
+
+ ngOnInit(): void {
+
+      this.obtenerTArjetas();
+  }
+
+10. Habilitamos los cors en el BAcken para que podamos acceder a las peticiones Http
+
+
+El archivo programs.cs
+
+builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",
+                             builder => builder.AllowAnyOrigin()
+                                                .AllowAnyHeader()
+                                                .AllowAnyMethod()));
+
+
+
+app.UseCors("AllowWebApp");
+
+
+
+11. Ya podemos revisar desde el console del navegador donde ejecutamos el fronted,que estamos consumiendo la API que consume los 
+datos de la DB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

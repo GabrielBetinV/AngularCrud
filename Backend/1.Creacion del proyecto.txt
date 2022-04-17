@@ -1,0 +1,16 @@
+1. Descargamos el visual studio community
+
+	https://visualstudio.microsoft.com/es/downloads/
+	https://youtu.be/Wktc7m7rX0s
+
+2. Instalamos SQl Server
+
+
+	https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
+	https://www.microsoft.com/es-es/sql-server/sql-server-downloads
+	https://youtu.be/iYBXDQvIgTk
+
+3. Creamos el proyecto en visual studio
+
+
+	ASP.NET Core Web Api

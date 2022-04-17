@@ -1,0 +1,15 @@
+https://getbootstrap.com/
+
+Podemos trabajarlo de dos maneras:
+
+=> Desde el DNS
+
+=> Instalando al proyecto.
+	
+	npm install bootstrap
+
+Luego de instalarlo debemos modificar el archivo angular.json
+	
+Escribir dentro de "styles", despues de una coma
+
+	"node_modules/bootstrap/dist/css/bootstrap.min.css"

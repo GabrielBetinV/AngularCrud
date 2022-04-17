@@ -1,0 +1,38 @@
+1. para iconos utilizamos Font Awesome
+
+		https://fontawesome.com/
+
+O con la CDN
+
+https://cdnjs.com/libraries/font-awesome
+
+
+Pegamos la CDN en el Index, en el head del index.html
+
+
+2.  Colocamos un cursor poniter en el CSS del componente.
+
+3. Creamos una lista en el archivo .TS
+
+ listTarjeta: any[] = [
+
+      {titular: "Juan Perez", numeroTarjeta: "12321454343", fechaExpiracion: "11/12", cvv: "123" },
+      {titular: "Migel Gonzales", numeroTarjeta: "65454654654", fechaExpiracion: "11/24", cvv: "456" }
+  ];
+
+
+4. Colocamos una directiva en la tabla para traer los datos
+
+
+  <table class="table">
+                                <tbody>
+                                    <tr *ngFor="let tarjeta of listTarjeta ">
+
+                                        <td>{{tarjeta.titular}}</td>
+                                        <td>{{tarjeta.numeroTarjeta}}</td>
+                                        <td>{{tarjeta.fecghaExpiracion}}</td>
+                                        <td><i class="far fa-solid fa-pen-to-square text-info"></i></td>
+                                        <td><i class="far fa-solid fa-trash-can text-danger"></i></td>
+                                    </tr>
+                                   </tbody>
+                            </table>

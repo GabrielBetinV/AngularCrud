@@ -1,0 +1,28 @@
+
+1. Ingresamos a la pagina
+
+	https://fonts.google.com/
+
+2. Seleccionamos la fuente que queremos u damos click en Select this style
+
+3. Copiamos el link
+	<link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+
+4. Lo pegamos en el index.html dentro del head
+
+5. Copiamos la regla CSS
+
+	font-family: 'Potta One', cursive;
+
+6. Creamos una clase dentro del style.css
+
+.titulo{
+
+    font-family: 'Potta One', cursive;
+    text-align: center;
+}
+7. Ya podemos aplicarla a las etiquetas html, por ejemplo:
+
+
+
+ 

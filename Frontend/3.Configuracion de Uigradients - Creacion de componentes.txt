@@ -1,0 +1,79 @@
+
+1. Ingresamos a la pagina para elegir un color de fondo
+
+	https://uigradients.com/#EveningNight
+
+2.  Pegamos el color de fondo en archivo style.css
+
+	en la etiqueta Body
+
+
+3. Creamos una carpeta llamada components dentro de la carpeta app
+
+	* Utilizaremos el comando generate, por ejemplo
+
+		si digitamos ng g help, observaremos todas las opciones que tendremos
+		para genearar: 
+			Collection "@schematics/angular" (default):
+    			app-shell
+    			application
+    			class
+    			component
+    			guard
+    			interceptor
+    			interface
+    			library
+    			module
+    			pipe
+   			resolver
+    			service
+    			service-worker
+   			 web-worker
+
+	
+	* Creamos el componente	asi:
+
+		ng g c components/tarjetaCredito
+
+		la g es de generate
+		la c de components
+		compónents es la carpetya
+		y luego el nombre
+		
+
+4. para renderizar el componente lo hacemos dentro del app.component.html
+
+	<app-tarjeta-credito></app-tarjeta-credito> // Este nombre esta dentro del archivo
+	.ts en la etiqueta selector.
+
+5. Ya podemos escribir en el html del componente lo que queremos desarrollar
+
+ Por ejemplo
+
+
+  <div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-lg-8 offset-lg-2">
+
+
+            <div class="card">
+
+                <div class="car-body text-center">
+
+                    <h3>Tarjeta Credito</h3>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>

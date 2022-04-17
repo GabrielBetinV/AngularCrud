@@ -1,0 +1,68 @@
+1. (Metodo GET) Solo guardamos el data en la lista crear para mostrar los datos en el navegador.
+
+
+
+ obtenerTArjetas(){
+
+    this._tarjetaServices.getListTarjetas().subscribe(data =>{
+      console.log(data);
+      this.listTarjeta = data; // Aquiiiiiiiiii
+    }, error => {  
+
+     console.log(error); 
+
+    })
+
+
+2. (Metodo Delete) Agregamos el metodo en el services 
+
+
+  deleteTarjetas(id: number): Observable<any>{
+
+    return this.http.delete(this.myAppUrl + this.myApiUrl + id);
+
+  }
+
+
+3. Creamos el metodo eliminar en el componente.ts
+
+
+
+  eliminarTarjeta(id: number){
+
+   
+    this._tarjetaServices.deleteTarjetas(id).subscribe(data =>{
+      this.toastr.error('La tarjeta fue eliminada con exito' , 'Tarjeta Eliminada');
+      this.obtenerTArjetas();
+    }, error => {  
+
+     console.log(error); 
+
+    })
+
+
+4. Agregamos el tarjeta.id en el boton de eliminar del HTML
+
+  <i (click)="eliminarTarjeta(tarjeta.id)" class="far fa-trash-alt text-danger"></i>
+
+<table class="table">
+                <tbody>
+                    <tr *ngFor="let tarjeta of listTarjeta">
+                        <td>{{ tarjeta.titular }}</td>
+                        <td>{{ tarjeta.numeroTarjeta }}</td>
+                        <td>{{ tarjeta.fechaExpiracion }}</td>
+                        <td>
+                            <i  class="far fa-edit text-info"></i>
+                        </td>
+                        <td>
+                            <i (click)="eliminarTarjeta(tarjeta.id)" class="far fa-trash-alt text-danger"></i>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+
+
+

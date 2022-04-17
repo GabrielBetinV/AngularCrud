@@ -1,0 +1,40 @@
+1. Creamos un servicio que guarde los datos
+
+
+ saveTarjeta(tarjeta:any): Observable<any>{
+
+    return this.http.post(this.myAppUrl + this.myApiUrl,tarjeta);
+
+  }
+
+
+2. Creamos el metodo en el ts del componente
+
+
+	 agregarTarjeta(){
+
+   
+    const tarjeta: any = {
+
+      titular: this.form.get("titular")?.value,
+      numeroTarjeta: this.form.get("numeroTarjeta")?.value,
+      fechaExpiracion: this.form.get("fechaExpiracion")?.value,
+      cvv: this.form.get("cvv")?.value
+ 
+    }
+
+    this._tarjetaServices.saveTarjeta(tarjeta).subscribe(data =>{
+      this.toastr.success('La tarjeta fue registrada con exito', 'Tarejeta Registrada');
+      this.obtenerTArjetas();
+      this.form.reset();
+    }, error => {  
+
+     console.log(error); 
+     this.toastr.error('Ops ocurrior un error', 'Error');
+
+    })
+
+   
+    
+        
+  }

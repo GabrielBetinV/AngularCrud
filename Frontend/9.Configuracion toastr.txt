@@ -1,0 +1,53 @@
+1.  Ingresamos a la pagina del toast
+
+	https://www.npmjs.com/package/ngx-toastr
+
+
+2. Seguimos los pasos de instalacion
+
+
+npm install ngx-toastr --save
+npm install @angular/animations --save
+
+3. Configuramos el stuli, agregando esta la linea en el archivo angula json
+
+ "node_modules/ngx-toastr/toastr.css"
+
+4. Agreamos los modulos en el app.module
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
+  ],
+
+
+5. Inyectarlo atravez de insercion de dependecias, en el constructor del archivo ts
+
+import { ToastrService } from 'ngx-toastr';
+
+
+  constructor(private fb:FormBuilder,private toastr: ToastrService) {
+
+      this.form = this.fb.group({
+
+          titular: ['', Validators.required],
+          numeroTarjeta: ['',[Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
+          fechaExpiracion: ['',[Validators.required, Validators.maxLength(5), Validators.minLength(5)]],
+          cvv: ['',[Validators.required, Validators.maxLength(3), Validators.minLength(3)]]
+      })
+
+6. para utilizar utilizamos  esta linea
+
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+}

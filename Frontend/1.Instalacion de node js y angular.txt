@@ -1,0 +1,28 @@
+1. Instalar node Js desde la la pagina
+
+	*para ver la version del node
+		cmd : node -v
+
+2. Instalar angular en la pagina cli.angular.io
+
+	cmd : npm install -g @angular/cli
+	
+     *Para ver la version
+  	 
+	cmd : ng --version
+
+
+
+	Comando ng help = Sirve para ver todos los comandos disponibles
+
+		ng build --prod // para distribuir la aplicacion
+
+3.  Creamos el proyecto Angular
+
+
+ 	* cmd : ng new my-first-project // Creamos el proyecto
+	* cd my-first-project // Accedemos a la carpta donde esta el proyecto
+	* ng serve --o // Para  ejecutar la aplicacion
+
+
+

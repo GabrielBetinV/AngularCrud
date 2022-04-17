@@ -1,0 +1,11 @@
+Creamos LA FUNCION DE ELIMINAR 
+
+ eliminarTarjeta(index: number){
+
+   this.listTarjeta.splice(index, 1)
+   this.toastr.error('La tarjeta fue eliminada con exito' , 'Tarjeta Eliminada');
+    
+
+
+
+  }

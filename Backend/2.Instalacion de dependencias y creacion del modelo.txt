@@ -1,0 +1,47 @@
+1. Instalar 3 dependencias
+
+
+Herramientas - administrador de paquetes nuget - administrador...
+
+
+	* EntityFramework Core
+	* EntityFramework tools
+	* Entityframework sql server
+
+2. Creamos la carperta models y las clases que necesitemos
+
+
+Documentacion de entity 
+
+https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx
+
+
+3. Creamos el modelo, ejemplo:
+
+
+
+using System.ComponentModel.DataAnnotations;
+
+namespace FBTarjetaCreedito.Models
+{
+    public class TarjetaCredito
+    {
+
+        [Required]// El campo es Requerido
+        public int Id { get; set; }
+
+        [Required]
+        public string Titular { get; set; }
+
+        [Required]
+        public string NumeroTarjeta { get; set; }
+
+        [Required]
+        public string FechaExpiracion { get; set; }
+
+        [Required]
+        public string Cvv { get; set; }
+
+
+    }
+}

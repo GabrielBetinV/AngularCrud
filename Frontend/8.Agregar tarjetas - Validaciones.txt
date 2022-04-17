@@ -1,0 +1,53 @@
+1. CAmpos requeridos, se coloca dentro del constrycor del formulario
+
+
+
+constructor(private fb:FormBuilder) {
+
+      this.form = this.fb.group({
+
+          titular: ['', Validators.required],
+          numeroTarjeta: ['',[Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
+          fechaExpiracion: ['',[Validators.required, Validators.maxLength(5), Validators.minLength(5)]],
+          cvv: ['',[Validators.required, Validators.maxLength(3), Validators.minLength(3)]]
+      })
+
+
+2. Agregamos dos clases em elCSS que contengan un color
+
+.green-icon{
+
+
+    color:#198754
+}
+
+
+
+.green-icon{
+    color:#ce0808
+
+}
+
+
+3. Al icono de cualquier etiqueta le colocamos la validacion:
+
+-se coloca en rojo cuando es invalido, verde cuando es valido y la propiedad touched
+es para que se activen lasvalidaciones cuando se toque el imput
+
+<i class="fa-solid fa-user" 
+[class.green-icon]="this.form.get('titular')?.valid"
+[class.red-icon]="this.form.get('titular')?.invalid && this.form.get('titular')?.touched "
+></i>
+
+
+Ademas de estas validaciones, se puede colocar la siguiente validacion en elinput
+para controlar la cantidad de caracteres.
+
+ <input formControlName="numeroTarjeta"    maxlength="16"  type="text" class="form-control" placeholder="Numero de Tarjeta" >
+
+Tamien podemos tener el boton deshabilitado cuando el formulario sea invalido
+
+
+ <button  [disabled]="this.form.invalid"  type ="submit" class="btn btn-info btn-lg ">
+
+

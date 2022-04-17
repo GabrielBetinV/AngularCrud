@@ -1,0 +1,68 @@
+1. Creramos el DB Context
+
+	* Creamos una clase llamada AplicationDbContext que herede de Db COntext
+
+
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Channels;
+using FBTarjetaCreedito.Models;
+
+
+
+
+namespace FBTarjetaCreedito
+{
+    public class AplicationDbContext : DbContext
+    { 
+        // Configuramos los Db Set para mapear los datos
+
+        DbSet<TarjetaCredito> TarjetaCredito {get; set; }
+  
+    
+    
+            // creamos controlador
+        public AplicationDbContext(DbContextOptions<AplicationDbContext> options) : base(options) 
+        {
+        
+            
+        }
+
+
+    }
+}
+
+
+
+2. Agregamos el servicio en el archivo program.cs
+
+
+
+
+builder.Services.AddDbContext<AplicationDbContext>( options => 
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+
+3. Colocamos la cadena de conexcion enel appsetting.json
+
+
+
+"ConnectionStrings": {
+
+    "DecConnection": "Server=DESKTOP-T66SHUD;Database=TarjetaCredito;Trusted_Connection=True; MultipleActiveResultSets=True;"
+
+  }
+
+4. hacemos la emigracion de la base de datos
+
+
+	-  Herramientas - Administracion de paquetes nugets - console........
+
+	- Escibimos los siguientes comandos
+
+
+	Add-Migration v1.0.0 /// Para que se creee la base de datos
+	update-database
+		
+5. Verificamos que se haya creado la base de dato y la tabla

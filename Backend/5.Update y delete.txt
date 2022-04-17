@@ -1,0 +1,74 @@
+1. Creamos  el PUT
+
+
+// PUT api/<TarjetaController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] TarjetaCredito tarjeta)
+        {
+
+
+            try
+            {
+
+                if (id != tarjeta.Id)
+                {
+
+                    return NotFound();
+                }
+
+                _context.Update(tarjeta);
+                await _context.SaveChangesAsync();
+                return Ok( new { message = "Tarjeta editada Correctamente!"});
+
+
+              
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+
+
+        }
+
+
+
+2. Creamos el delete
+
+
+// DELETE api/<TarjetaController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            try
+            {
+                // Esta variablebusca la coincidencia
+                var tarjeta = await _context.TarjetaCredito.FindAsync(id);
+
+
+                if(tarjeta == null)
+                {
+                    return NotFound();
+
+                }
+
+                _context.TarjetaCredito.Remove(tarjeta);
+                _context.SaveChangesAsync();
+                return Ok(new{ message=  "Tarjeta Eliminada Correctamente" });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+
+
+        }
+    }
+
